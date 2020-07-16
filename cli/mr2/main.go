@@ -36,13 +36,13 @@ func main() {
 	app.Version = "20200102"
 	app.Usage = "Expose local server to external network"
 	app.Flags = []cli.Flag{
-		&cli.BoolFlag{
+		cli.BoolFlag{
 			Name:        "debug",
 			Aliases:     []string{"d"},
 			Usage:       "Enable debug, more logs",
 			Destination: &debug,
 		},
-		&cli.StringFlag{
+		cli.StringFlag{
 			Name:        "listen",
 			Aliases:     []string{"l"},
 			Usage:       "Listen address for debug",
@@ -50,22 +50,22 @@ func main() {
 			Destination: &debugListen,
 		},
 	}
-	app.Commands = []*cli.Command{
-		&cli.Command{
+	app.Commands = []cli.Command{
+		{
 			Name:  "server",
 			Usage: "Run as server mode",
 			Flags: []cli.Flag{
-				&cli.StringFlag{
+				cli.StringFlag{
 					Name:    "listen",
 					Aliases: []string{"l"},
 					Usage:   "Listen address, like: 1.2.3.4:5",
 				},
-				&cli.StringFlag{
+				cli.StringFlag{
 					Name:    "password",
 					Aliases: []string{"p"},
 					Usage:   "Password",
 				},
-				&cli.StringSliceFlag{
+				cli.StringSliceFlag{
 					Name:    "portPassword",
 					Aliases: []string{"P"},
 					Usage:   "Only allow this port and password, like '1000 password'. If you specify this parameter, --password will be ignored",
@@ -94,55 +94,55 @@ func main() {
 				return s.ListenAndServe()
 			},
 		},
-		&cli.Command{
+		{
 			Name:  "client",
 			Usage: "Run as client mode",
 			Flags: []cli.Flag{
-				&cli.StringFlag{
+				cli.StringFlag{
 					Name:    "server",
 					Aliases: []string{"s"},
 					Usage:   "Server address, like: 1.2.3.4:5",
 				},
-				&cli.StringFlag{
+				cli.StringFlag{
 					Name:    "password",
 					Aliases: []string{"p"},
 					Usage:   "Password",
 				},
-				&cli.Int64Flag{
+				cli.Int64Flag{
 					Name:    "serverPort",
 					Aliases: []string{"P"},
 					Usage:   "Server port you want to use. When server run as port mode",
 				},
-				&cli.StringFlag{
+				cli.StringFlag{
 					Name:    "serverDomain",
 					Aliases: []string{"D"},
 					Usage:   "Server subdomain you want to use. When server run as domain mode. Only support official server now.",
 				},
-				&cli.StringFlag{
+				cli.StringFlag{
 					Name:    "clientServer, c",
 					Aliases: []string{"c"},
 					Usage:   "Client server address, like: 1.2.3.4:5",
 				},
-				&cli.StringFlag{
+				cli.StringFlag{
 					Name:  "clientDirectory",
 					Usage: "Client directory, like: /path/to/www. If you specify this parameter, --clientServer will be ignored",
 				},
-				&cli.Int64Flag{
+				cli.Int64Flag{
 					Name:  "clientPort",
 					Usage: "Work with --clientDirectory",
 					Value: 54321,
 				},
-				&cli.Int64Flag{
+				cli.Int64Flag{
 					Name:  "tcpTimeout",
 					Value: 60,
 					Usage: "connection tcp keepalive timeout (s), works with --serverPort",
 				},
-				&cli.Int64Flag{
+				cli.Int64Flag{
 					Name:  "tcpDeadline",
 					Value: 0,
 					Usage: "connection deadline time (s), works with --serverPort",
 				},
-				&cli.Int64Flag{
+				cli.Int64Flag{
 					Name:  "udpDeadline",
 					Value: 60,
 					Usage: "connection deadline time (s), works with --serverPort",
